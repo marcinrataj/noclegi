@@ -5,7 +5,7 @@ import styles from './Header.module.css'
 function Header() {
 	return (
 		//container
-		<header className={`${styles.header} container`}>
+		<header className={`container ${styles.header}`}>
 			<Searchbar/>
 		</header>
 	);
