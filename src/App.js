@@ -37,7 +37,7 @@ class App extends Component {
 	state = {
 		hotels: [],
 		loading: true,
-		theme: 'primary',
+		theme: 'danger',
 	};
 
 	searchHandler(term) {
@@ -79,7 +79,7 @@ class App extends Component {
 		const menu = <Menu />;
 		const footer = <Footer theme={this.state.theme} />;
 		return (
-			<ThemeContext.Provider value='warning'>
+			<ThemeContext.Provider value={this.state.theme}>
 				<Layout header={header} menu={menu} content={content} footer={footer} />
 			</ThemeContext.Provider>
 		);
