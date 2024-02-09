@@ -4,6 +4,8 @@ import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
 import Hotels from './components/Hotels/Hotels';
 import LoadingIcon from './components/UI/LoadingIcon/LoadingIcon';
+import Searchbar from './components/UI/Searchbar/Searchbar';
+// import Searchbar from './components/Searchbar/Searchbar';
 
 class App extends Component {
 	hotels = [
@@ -33,10 +35,9 @@ class App extends Component {
 	};
 
 	searchHandler(term) {
-		const hotels = [...this.hotels]
-		.filter((x) => x.name
-			.toLowerCase()
-			.includes(term.toLowerCase()));
+		const hotels = [...this.hotels].filter((x) =>
+			x.name.toLowerCase().includes(term.toLowerCase())
+		);
 		this.setState({ hotels });
 	}
 
@@ -53,12 +54,15 @@ class App extends Component {
 		console.log('component wyrenderowany');
 		return (
 			<div className='App'>
-				<Header onSearch={(term) => this.searchHandler(term)} />
+				<Header>
+					<Searchbar onSearch={term => this.searchHandler(term)} />
+				</Header>
 				<Menu />
-				{this.state.loading 
-				? <LoadingIcon/>
-				: <Hotels hotels={this.state.hotels} />
-				}
+				{this.state.loading ? (
+					<LoadingIcon />
+				) : (
+					<Hotels hotels={this.state.hotels} />
+				)}
 			</div>
 		);
 	}
