@@ -10,6 +10,7 @@ const propsTypes = {
 };
 
 
+
 function Hotel(props) {
 	return (
 		<>
@@ -27,7 +28,7 @@ function Hotel(props) {
 							</div>
 							<div className='col text-end'>
 								<h5>{props.rating}</h5>
-						<a href='1' className='btn btn-primary mt-2 px-5 float-end'>
+						<a href='1' className={`btn btn-${props.theme} mt-2 px-5 float-end`}>
 							Pokaż
 						</a>
 							</div>

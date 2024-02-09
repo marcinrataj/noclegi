@@ -8,7 +8,6 @@ function Searchbar(props) {
 	const [term, setTerm] = useState('');
 
 	const search = () => {
-		// console.log('szukaj', term);
 		props.onSearch(term)
 	};
 
@@ -28,7 +27,7 @@ function Searchbar(props) {
 				type='text'
 				placeholder='Szukaj...'
 			/>
-			<button onClick={search} className='mx-1 btn btn-secondary'>
+			<button onClick={search} className={`ml-1 btn btn-${props.theme}`}>
 				Szukaj
 			</button>
 		</div>
