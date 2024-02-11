@@ -37,7 +37,7 @@ class App extends Component {
 	state = {
 		hotels: [],
 		loading: true,
-		theme: 'danger',
+		theme: 'warning',
 	};
 
 	searchHandler(term) {
@@ -68,7 +68,7 @@ class App extends Component {
 					onSearch={(term) => this.searchHandler(term)}
 					theme={this.state.theme}
 				/>
-				<ThemeButton onChange={this.changeTheme} />
+				<ThemeButton />
 			</Header>
 		);
 		const content = this.state.loading ? (
@@ -79,7 +79,12 @@ class App extends Component {
 		const menu = <Menu />;
 		const footer = <Footer theme={this.state.theme} />;
 		return (
-			<ThemeContext.Provider value={this.state.theme}>
+			<ThemeContext.Provider
+				value={{
+					theme: this.state.theme,
+					changeTheme: this.changeTheme,
+				}}
+			>
 				<Layout header={header} menu={menu} content={content} footer={footer} />
 			</ThemeContext.Provider>
 		);

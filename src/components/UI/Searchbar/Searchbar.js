@@ -30,8 +30,8 @@ function Searchbar(props) {
 			/>
 			<ThemeContext.Consumer>
 				{
-					value => (
-					<button onClick={search} className={`ml-1 btn btn-${value}`}>
+					({theme}) => (
+					<button onClick={search} className={`ml-1 btn btn-${theme}`}>
 						Szukaj
 					</button>
 				)}
