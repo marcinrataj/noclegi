@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -12,8 +12,7 @@ import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
 
 class App extends Component {
-	static contextType = ThemeContext;
-
+	// static contextType = ThemeContext;
 	hotels = [
 		{
 			id: 1,
@@ -66,7 +65,7 @@ class App extends Component {
 	render() {
 		const header = (
 			<Header>
-				<Searchbar
+				<Searchbar 
 					onSearch={(term) => this.searchHandler(term)}
 					theme={this.state.theme}
 				/>
