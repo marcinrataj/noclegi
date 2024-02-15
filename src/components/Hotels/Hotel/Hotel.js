@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import styles from './Hotel.module.css';
 import hotelImg from '../../../assets/images/hotel.jpg';
 import ThemeContext from '../../../context/themeContext';
+import { useContext } from 'react';
 
 const propsTypes = {
 	name: PropTypes.string.isRequired,
@@ -11,6 +12,7 @@ const propsTypes = {
 };
 
 function Hotel(props) {
+	const theme = useContext(ThemeContext);
 	return (
 		<>
 			<div className={`card  ${styles.hotel}`}>
@@ -27,18 +29,12 @@ function Hotel(props) {
 								</div>
 								<div className='col text-end'>
 									<h5>{props.rating}</h5>
-									<ThemeContext.Consumer>
-										{
-											({theme}) => (
-												<a
-													href='1'
-													className={`btn btn-${theme} mt-2 px-5 float-end`}
-												>
-													Pokaż
-												</a>
-											)
-										}
-									</ThemeContext.Consumer>
+									<a
+										href='1'
+										className={`btn btn-${theme.color} mt-2 px-5 float-end`}
+									>
+										Pokaż
+									</a>
 								</div>
 							</div>
 						</div>

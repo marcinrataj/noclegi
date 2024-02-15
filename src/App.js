@@ -9,6 +9,7 @@ import Layout from './components/Layout/Layout';
 import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
+import AuthContext from './context/authContext';
 
 class App extends Component {
 	static contextType = ThemeContext;
@@ -37,7 +38,8 @@ class App extends Component {
 	state = {
 		hotels: [],
 		loading: true,
-		theme: 'warning',
+		theme: 'danger',
+		isAuthenticated: false,
 	};
 
 	searchHandler(term) {
@@ -79,14 +81,27 @@ class App extends Component {
 		const menu = <Menu />;
 		const footer = <Footer theme={this.state.theme} />;
 		return (
-			<ThemeContext.Provider
+			<AuthContext.Provider
 				value={{
-					theme: this.state.theme,
-					changeTheme: this.changeTheme,
+					isAuthenticated: this.state.isAuthenticated,
+					login: () => this.setState({ isAuthenticated: true }),
+					logout: () => this.setState({ isAuthenticated: false }),
 				}}
 			>
-				<Layout header={header} menu={menu} content={content} footer={footer} />
-			</ThemeContext.Provider>
+				<ThemeContext.Provider
+					value={{
+						color: this.state.theme,
+						changeTheme: this.changeTheme,
+					}}
+				>
+					<Layout
+						header={header}
+						menu={menu}
+						content={content}
+						footer={footer}
+					/>
+				</ThemeContext.Provider>
+			</AuthContext.Provider>
 		);
 	}
 }
