@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 80px 15px;
+  padding: 100px 15px;
   overflow: hidden;/*to co wyjedzie za header bedzie schowane*/
   position: relative;
 }

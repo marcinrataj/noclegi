@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer, useState, useCallback } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -11,6 +11,7 @@ import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
 import BestHotel from './components/Hotels/BestHotel/BestHotel';
+import InspiringQuote from './components/InspiringQuote/InspiringQuote';
 
 const backendHotels = [
 	{
@@ -69,13 +70,12 @@ function App() {
 	};
 
 	const getBestHotel = () => {
-		if(state.hotels.length < 2){
+		if (state.hotels.length < 2) {
 			return null;
-		}else{
-			return state.hotels.sort((a, b) => a.rating > b.rating ? 1 : -1)[0];
+		} else {
+			return state.hotels.sort((a, b) => (a.rating > b.rating ? 1 : -1))[0];
 		}
-	}
-
+	};
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -86,18 +86,19 @@ function App() {
 
 	const header = (
 		<Header>
+			<InspiringQuote />
 			<Searchbar onSearch={(term) => searchHandler(term)} />
 			<ThemeButton />
 		</Header>
 	);
-	const content = 
-	state.loading 
-		? ( <LoadingIcon />) 
-		: ( <>
-		<BestHotel getHotel={getBestHotel}/>
+	const content = state.loading ? (
+		<LoadingIcon />
+	) : (
+		<>
+			<BestHotel getHotel={getBestHotel} />
 			<Hotels hotels={state.hotels} />
 		</>
-			);
+	);
 	const menu = <Menu />;
 	const footer = <Footer />;
 
