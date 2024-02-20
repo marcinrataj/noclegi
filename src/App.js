@@ -91,11 +91,12 @@ function App() {
 			<ThemeButton />
 		</Header>
 	);
+	
 	const content = state.loading ? (
 		<LoadingIcon />
 	) : (
 		<>
-			<BestHotel getHotel={getBestHotel} />
+			{getBestHotel() ? <BestHotel getHotel={getBestHotel} /> : null }
 			<Hotels hotels={state.hotels} />
 		</>
 	);
