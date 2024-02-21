@@ -1,25 +1,21 @@
-import { useState } from "react";
-
-
+import { useState } from 'react';
 
 function useStateStorage(key, defaultValue) {
-  let value;
-  const [state, setState] = useState(defaultValue);
+	const [state, setState] = useState(() => {
+    //.. sprawdzana jest wartość localstorage
+		const storageValue = window.localStorage.getItem(key);
+    //.. jeśli istnieje to przypisuje wartość z localstorage
+		return storageValue ? JSON.parse(storageValue) : defaultValue;
+			 
+	});
 
-  const storageValue = window.localStorage.getItem(key)
+	const setValue = (val) => {
+		setState(val);
+		//.. przekształcamy z powrotem na string'a
+		window.localStorage.setItem(key, JSON.stringify(val));
+	};
 
-  if(storageValue){
-    value = JSON.parse(storageValue)
-  }else{
-    value = state
-  }
-
-  const setValue = val => {
-    setState(val)
-    window.localStorage.setItem(key,JSON.stringify(val))
-  };
-
-  return [value, setValue]
+	return [state, setValue];
 }
 
 export default useStateStorage;

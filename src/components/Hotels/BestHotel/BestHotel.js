@@ -15,11 +15,11 @@ const BestHotel = (props) => {
 			const seconds = Math.floor(leftTime % 60);
 			setTime(`minut: ${minutes}, sekund: ${seconds}`);
 
-			console.log(leftTime);
+			// console.log(leftTime);
 		}, 1000);
 
 		return () => {
-			console.log('best hotel unmounted')
+			// console.log('best hotel unmounted')
 			clearInterval(interval);
 		};
 	}, []);

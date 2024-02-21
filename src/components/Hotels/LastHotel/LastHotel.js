@@ -1,0 +1,35 @@
+function LastHotel(props) {
+
+	const clickNoHandler = e => {
+
+	}
+	return (
+		<>
+			<div className='card mb-2 bg-light'>
+				<div className='card-header'>
+					Ostatnio oglądałeś ten hotel. Wciąż zainteresowany?
+				</div>
+				<div className='card-body'>
+					<div className='d-flex justify-content-between'>
+						<h5 className='card-title'>{props.name}</h5>
+						<span className='badge bg-light text-bg-info'>{props.city}</span>
+					</div>
+					<div className='ml-auto d-flex justify-content-between'>
+						<a href='#' className='btn btm-sm btn-dark'>
+							Tak!
+						</a>
+						<button
+							href='#'
+							onClick={props.onRemove}
+							className='btn btm-sm btn-dark'
+						>
+							Nie
+						</button>
+					</div>
+				</div>
+			</div>
+		</>
+	);
+}
+
+export default LastHotel;
