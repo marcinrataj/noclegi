@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Hotel from './Hotel/Hotel';
 import styles from './Hotels.module.css';
-import useWebsiteTitle from '../../hooks/useWebsiteTitle';
 
 const propTypes = {
 	hotels: PropTypes.array.isRequired,

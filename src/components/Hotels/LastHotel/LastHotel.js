@@ -1,8 +1,6 @@
 function LastHotel(props) {
 
-	const clickNoHandler = e => {
 
-	}
 	return (
 		<>
 			<div className='card mb-2 bg-light'>
