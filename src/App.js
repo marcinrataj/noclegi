@@ -1,5 +1,9 @@
 import { useReducer } from 'react';
-import {BrowserRouter as Router,Route,} from 'react-router-dom/cjs/react-router-dom.min';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+} from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -13,7 +17,8 @@ import ReducerContext from './context/reducerContext';
 import InspiringQuote from './components/InspiringQuote/InspiringQuote';
 import { reducer, initialState } from './reducer';
 import Home from './pages/Home/Home';
-
+import Hotel from './pages/Hotel/Hotel';
+import LoadingIcon from './components/UI/LoadingIcon/LoadingIcon';
 
 const backendHotels = [
 	{
@@ -39,10 +44,8 @@ function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	const searchHandler = (term) => {
-		const newHotels = [...backendHotels]
-		.filter((x) => x.name
-		.toLowerCase()
-		.includes(term.toLowerCase())
+		const newHotels = [...backendHotels].filter((x) =>
+			x.name.toLowerCase().includes(term.toLowerCase())
 		);
 		dispatch({ type: 'set-hotels', hotels: newHotels });
 	};
@@ -56,15 +59,13 @@ function App() {
 	);
 
 	const content = (
-		<>
-			<Route exact path="/">
-				<Home />
-			</Route>
-
-			<Route path="/hotel/:id">
-				<h1>To jest jakiś hotel</h1>
-			</Route>
-		</>
+		<div>
+			<Switch>
+				<Route path='/hotele/:id' component={Hotel} />
+				<Route exact path='/' component={Home} />
+			</Switch>
+			{state.loading ? <LoadingIcon/> : null}
+		</div>
 	);
 
 	const menu = <Menu />;
@@ -85,16 +86,18 @@ function App() {
 						changeTheme: () => dispatch({ type: 'change-theme' }),
 					}}
 				>
-					<ReducerContext.Provider value={{
-						state: state,
-						dispatch: dispatch
-					}}>
-					<Layout
-						header={header}
-						menu={menu}
-						content={content}
-						footer={footer}
-					/>
+					<ReducerContext.Provider
+						value={{
+							state: state,
+							dispatch: dispatch,
+						}}
+					>
+						<Layout
+							header={header}
+							menu={menu}
+							content={content}
+							footer={footer}
+						/>
 					</ReducerContext.Provider>
 				</ThemeContext.Provider>
 			</AuthContext.Provider>

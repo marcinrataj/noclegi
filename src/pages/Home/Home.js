@@ -45,15 +45,15 @@ export default function Home(props) {
   const removeLastHotel = () => {setLastHotel(null);};
 
   useEffect(() => {
+			reducer.dispatch({ type: 'set-loading', loading: true });
+
 		setTimeout(() => {
 			reducer.dispatch({ type: 'set-hotels', hotels: backendHotels });
 			reducer.dispatch({ type: 'set-loading', loading: false });
 		}, 1000);
 	}, []);
 
-  if(reducer.state.loading){
-    return <LoadingIcon /> ;
-  }
+
 
 	return (
 		<>
@@ -65,42 +65,3 @@ export default function Home(props) {
 		</>
 	);
 }
-/*
-
-export default function Home(props) {
-  useWebsiteTitle('Strona główna');
-  const [lastHotel, setLastHotel] = useStateStorage('last-hotel', null);
-
-  const [loading, setLoading] = useState(true);
-  const [hotels, setHotels] = useState([]);
-
-  const getBestHotel = () => {
-    if (hotels.length < 2) {
-      return null;
-    } else {
-      return hotels.sort((a, b) => a.rating > b.rating ? -1 : 1)[0];
-    }
-  }
-  const openHotel = (hotel) => setLastHotel(hotel);
-  const removeLastHotel = () => setLastHotel(null);
-
-
-  useEffect(() => {
-    setTimeout(() => {
-      setHotels(backendHotels);
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-
-  return loading ? <LoadingIcon /> : (
-    <>
-      {lastHotel ? <LastHotel {...lastHotel} onRemove={removeLastHotel} /> : null}
-      {getBestHotel() 
-        ? <BestHotel getHotel={getBestHotel} /> 
-        : null
-      }
-      <Hotels onOpen={openHotel} hotels={hotels} />
-    </>
-  );
-} */

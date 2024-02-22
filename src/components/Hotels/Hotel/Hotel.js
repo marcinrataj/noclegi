@@ -17,10 +17,10 @@ function Hotel(props) {
 	const theme = useContext(ThemeContext);
 	const [auth] = useAuth();
 
-	const clickHandler = e => {
+	const clickHandler = (e) => {
 		// e.preventDefault();
-		props.onOpen(props)
-	}
+		props.onOpen(props);
+	};
 	return (
 		<>
 			<div className={`card  ${styles.hotel}`}>
@@ -37,10 +37,13 @@ function Hotel(props) {
 								</div>
 								<div className='col text-end'>
 									<h5>{props.rating}</h5>
-										<Link to={`/hotel/${props.id}`}>
-											Pokaż
-										</Link>
-										{/* <a
+									<Link
+										className={`btn btn-${theme.color} mt-2 px-5 float-end`}
+										to={`/hotele/${props.id}`}
+									>
+										Pokaż
+									</Link>
+									{/* <a
 										href='/hotel/id'
 										onClick={clickHandler}
 										className={`btn btn-${theme.color} mt-2 px-5 float-end`}

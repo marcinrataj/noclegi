@@ -1,6 +1,6 @@
-import React from 'react';
 import style from './Menu.module.css';
 import useAuth from '../../hooks/useAuth';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Menu() {
 	// const auth = useContext(AuthContext);
@@ -19,22 +19,19 @@ function Menu() {
 		<div  className={`${style.menuContainer}  `}>
 			<ul className={style.menu}>
 				<li className={`${style.menuItem}`}>
-					<a href='#'>Home</a>
+					<Link to='/' >Home</Link>
 				</li>
 
 				{auth ? (
-					<li className={style.menuItem}>
-						<a href='#' onClick={logout}>
-							Wyloguj
-						</a>
-					</li>
-				) : (
-					<li className={style.menuItem}>
-						<a href='#' onClick={login}>
-							Zaloguj
-						</a>
-					</li>
-				)}
+            <li className={style.menuItem}>
+              <a href="#" onClick={logout}>Wyloguj</a>
+            </li>
+          ) : (
+            <li className={style.menuItem}>
+              <a href="#" onClick={login}>Zaloguj</a>
+            </li>
+          )
+        }
 			</ul>
 		</div>
 	);
