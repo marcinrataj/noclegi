@@ -1,18 +1,18 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ThemeContext from '../../../context/themeContext';
+import { useHistory } from 'react-router-dom';
 
-const propTypes = {
-	onSearch: PropTypes.func.isRequired,
-};
 function Searchbar(props) {
 	const [term, setTerm] = useState('');
 	const theme = useContext(ThemeContext);
-
 	const inputRef = useRef(null);
+	const history = useHistory();
+
 
 	const search = () => {
-		props.onSearch(term);
+		//props.onSearch(term);,
+		history.push(`/wyszukaj/${term}`)
 	};
 
 	const onKeyDownHandler = (e) => {
@@ -21,18 +21,18 @@ function Searchbar(props) {
 		}
 	};
 
-const focusInput = () => {
-	inputRef.current.focus()
-}
+	const focusInput = () => {
+		inputRef.current.focus();
+	};
 
-useEffect(() => {
-	focusInput();
-},[])
+	useEffect(() => {
+		focusInput();
+	}, []);
 
 	return (
 		<div className='d-flex'>
 			<input
-			ref={inputRef}
+				ref={inputRef}
 				value={term}
 				onKeyDown={onKeyDownHandler}
 				onChange={(e) => setTerm(e.target.value)}
@@ -46,5 +46,4 @@ useEffect(() => {
 		</div>
 	);
 }
-Searchbar.propTypes = propTypes;
 export default Searchbar;
