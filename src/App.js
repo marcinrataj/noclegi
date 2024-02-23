@@ -19,6 +19,7 @@ import { reducer, initialState } from './reducer';
 import Home from './pages/Home/Home';
 import Hotel from './pages/Hotel/Hotel';
 import Search from './pages/Search/Search';
+import Profile from './pages/Profile/Profile';
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -37,8 +38,9 @@ function App() {
 
 				<Route path='/hotele/:id' component={Hotel} />
 				<Route path='/wyszukaj/:term' component={Search} />
+				<Route path='/profil' component={Profile} />
 				<Route exact path='/' component={Home} />
-				
+
 			</Switch>
 		</div>
 	);

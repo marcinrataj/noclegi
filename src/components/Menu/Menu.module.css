@@ -2,19 +2,22 @@
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-
 	text-align: left;
 }
 
 .menuItem {
 	display: inline-block;
-	margin: 10px 15px;
+	margin: 15px;
 }
 
 .menuItem a {
 	text-decoration: none;
 	color: #6c757d;
 }
+
+/* .menuItemActive{
+	text-decoration: underline;
+} */
 
 .menuContainer {
 	border: 1px solid #cdcdcd;
