@@ -1,11 +1,11 @@
-import { Switch, Route, NavLink } from 'react-router-dom';
+import { Switch, Route, NavLink, useRouteMatch } from 'react-router-dom';
 import ProfileDetails from './ProfileDetails/ProfileDetails';
 import MyHotels from './MyHotels/MyHotels';
-import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
 export default function Profile() {
 	const { path, url } = useRouteMatch();
 
-	console.log(path, url);
+	// throw new Error('Problem z internetem');
+
 	return (
 		<div className='card'>
 			<div className='card-header'>

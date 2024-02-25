@@ -1,9 +1,8 @@
 import style from './Menu.module.css';
 import useAuth from '../../hooks/useAuth';
-import { Link, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Menu() {
-	// const auth = useContext(AuthContext);
 	const [auth, setAuth] = useAuth();
 
 	const login = (e) => {
@@ -19,7 +18,7 @@ function Menu() {
 		<div className={`${style.menuContainer}`}>
 			<ul className={style.menu}>
 				<li className={`${style.menuItem}`}>
-					<NavLink exact to='/' activeClassName={style.menuItemActive}>
+					<NavLink exact to='/' >
 						Home
 					</NavLink>
 				</li>
@@ -27,7 +26,7 @@ function Menu() {
 				{auth ? (     
 					<>
 						<li className={style.menuItem}>
-							<NavLink to='/profil' activeClassName={style.menuItemActive}>
+							<NavLink to='/profil' >
 								Mój profil
 							</NavLink>
 						</li>
@@ -38,7 +37,7 @@ function Menu() {
 						</li>
 					</>
 				) : (
-					<li className={style.menuItem `td-underline`}>
+					<li className={style.menuItem}>
 						<a href='#' onClick={login}>
 							Zaloguj
 						</a>
