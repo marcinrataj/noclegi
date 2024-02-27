@@ -14,6 +14,6 @@ export default function LoadingButton(props) {
 			<span> </span>Sprawdzanie danych logowania...
 		</button>
 	) : (
-		<button className={`btn ${className} mt-3`}>{props.children}</button>
+		<button {...props} className={`btn ${className} mt-3`}>{props.children}</button>
 	);
 }
