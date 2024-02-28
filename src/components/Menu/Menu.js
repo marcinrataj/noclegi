@@ -26,7 +26,7 @@ function Menu() {
 				{auth ? (     
 					<>
 						<li className={style.menuItem}>
-							<NavLink to='/profil' >
+							<NavLink to='/profil' activeClassName={style.menuItemActive} >
 								Mój profil
 							</NavLink>
 						</li>
@@ -37,11 +37,18 @@ function Menu() {
 						</li>
 					</>
 				) : (
+						<>
+						<li className={style.menuItem}>
+						<NavLink activeClassName={style.menuItemActive} to='/rejestracja' >
+							Zarejestruj
+						</NavLink>
+					</li>
 					<li className={style.menuItem}>
 						<a href='#' onClick={login}>
 							Zaloguj
 						</a>
 					</li>
+						</>
 				)}
 			</ul>
 		</div>

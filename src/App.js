@@ -25,6 +25,7 @@ import Login from './pages/Auth/Login/Login';
 import AuthenticatedRoute from './components/hoc/AuthenticatedRoute';
 import ErrorBoundary from './components/hoc/ErrorBoundary';
 import AddHotel from './pages/Profile/MyHotels/AddHotel/AddHotel';
+import Register from './pages/Auth/Register/Register';
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
 					<Route path='/hotele/:id' component={Hotel} />
 					<Route path='/wyszukaj/:term?' component={Search} />
 					<Route path='/zaloguj' component={Login} />
+					<Route path='/rejestracja' component={Register} />
 					<Route path='/' exact component={Home} />
 					<Route component={NotFound} />
 				</Switch>
