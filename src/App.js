@@ -79,8 +79,8 @@ function App() {
 		<Router>
 			<AuthContext.Provider
 				value={{
-					isAuthenticated: state.isAuthenticated,
-					login: () => dispatch({ type: 'login' }),
+					user: state.user,
+					login: (user) => dispatch({ type: 'login', user }),
 					logout: () => dispatch({ type: 'logout' }),
 				}}
 			>
