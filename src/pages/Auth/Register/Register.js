@@ -2,7 +2,7 @@ import { useState } from 'react';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import { validate } from '../../../helpers/validations';
 import Input from '../../../components/Input/Input';
-import axiosFresh from 'axios';
+import axios from '../../../axios-auth';
 import useAuth from '../../../hooks/useAuth';
 import { useHistory } from 'react-router-dom';
 
@@ -35,15 +35,20 @@ const [error, setError] = useState('')
 		e.preventDefault();
 		
 		try {
-			const res = await axiosFresh.post(
-				`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDKW78JrEZZ_TXowtxvDlu0GYKljyKrB4o`, {
+			const res = await axios.post(
+				`accounts:signUp`, {
 					email: form.email.value,
 					password: form.password.value,
 					returnSecureToken: true
 
 				});
 				//
-				setAuth(true, res.data)
+				setAuth(true, {
+					email: res.data.email,
+					token: res.data.idToken,
+					userId: res.data.localId,
+	
+				})
 				history.push('/')
 
 		} catch(ex){

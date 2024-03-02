@@ -5,6 +5,7 @@ export default function useAuth() {
 	const authContext = useContext(AuthContext);
 
 	const auth = authContext.isAuthenticated;
+	
 	const setAuth = (isAuthenticated, tokenData = null) => {
 		if (isAuthenticated) {
 			//login
@@ -13,10 +14,9 @@ export default function useAuth() {
 				window.localStorage.setItem('token-data', JSON.stringify(tokenData))
 			}
 		} else {
+			//logout
 			authContext.logout()
-			if(tokenData){
-				window.localStorage.removeItem('token-data', JSON.stringify(tokenData))
-			}
+			window.localStorage.removeItem('token-data')
 		}
 
 

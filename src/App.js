@@ -1,4 +1,4 @@
-import { useReducer, lazy, Suspense } from 'react';
+import { useReducer, lazy, Suspense, useEffect } from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -31,6 +31,17 @@ const Profile = lazy(() => import('./pages/Profile/Profile'));
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
+	const checkUser = () => {
+		const tokenData = JSON.parse(window.localStorage.getItem('token-data'));
+		if (tokenData) {
+			dispatch({ type: 'login' });
+		}
+	};
+
+	useEffect(() => {
+		checkUser();
+	}, []);
+
 	const header = (
 		<Header>
 			<InspiringQuote />
@@ -41,20 +52,22 @@ function App() {
 
 	const content = (
 		<div>
-						<ErrorBoundary>
-
-			<Suspense fallback={<p>Ładowanie...</p>}>
-				<Switch>
-					<AuthenticatedRoute path='/profil/hotele/dodaj' component={AddHotel} />
-					<AuthenticatedRoute path='/profil' component={Profile} />
-					<Route path='/hotele/:id' component={Hotel} />
-					<Route path='/wyszukaj/:term?' component={Search} />
-					<Route path='/zaloguj' component={Login} />
-					<Route path='/rejestracja' component={Register} />
-					<Route path='/' exact component={Home} />
-					<Route component={NotFound} />
-				</Switch>
-			</Suspense>
+			<ErrorBoundary>
+				<Suspense fallback={<p>Ładowanie...</p>}>
+					<Switch>
+						<AuthenticatedRoute
+							path='/profil/hotele/dodaj'
+							component={AddHotel}
+						/>
+						<AuthenticatedRoute path='/profil' component={Profile} />
+						<Route path='/hotele/:id' component={Hotel} />
+						<Route path='/wyszukaj/:term?' component={Search} />
+						<Route path='/zaloguj' component={Login} />
+						<Route path='/rejestracja' component={Register} />
+						<Route path='/' exact component={Home} />
+						<Route component={NotFound} />
+					</Switch>
+				</Suspense>
 			</ErrorBoundary>
 		</div>
 	);
@@ -83,12 +96,12 @@ function App() {
 							dispatch: dispatch,
 						}}
 					>
-							<Layout
-								header={header}
-								menu={menu}
-								content={content}
-								footer={footer}
-							/>
+						<Layout
+							header={header}
+							menu={menu}
+							content={content}
+							footer={footer}
+						/>
 					</ReducerContext.Provider>
 				</ThemeContext.Provider>
 			</AuthContext.Provider>
