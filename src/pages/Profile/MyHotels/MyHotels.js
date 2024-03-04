@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import axios from '../../../axios';
 import {objectToArrayWithId} from '../../../helpers/objects'
-
+import useAuth from '../../../hooks/useAuth';
 
 
 
 export default function MyHotels(props) {
+	const [auth] = useAuth()
 	const { url } = useRouteMatch();
 	const [hotels, setHotels] = useState([]);
 
@@ -14,8 +15,9 @@ export default function MyHotels(props) {
 		try {
 			///
 			const res = await axios.get('/hotels.json')
-      const newHotel = objectToArrayWithId(res.data);
+      const newHotel = objectToArrayWithId(res.data)
       setHotels(newHotel)
+      console.log(newHotel)
 		} catch (ex) {
 			console.log(ex.response);
 		}
@@ -23,7 +25,7 @@ export default function MyHotels(props) {
 
 	useEffect(() => {
 		fetchHotels();
-	}, []);
+	},[]);
 
 	return (
 		<div>
