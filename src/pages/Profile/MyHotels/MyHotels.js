@@ -23,6 +23,15 @@ export default function MyHotels(props) {
 		}
 	};
 
+	const deleteHandler = async (id) => {
+			try{
+				await axios.delete(`/hotels/${id}.json`);
+				setHotels(hotels.filter(x => x.id !== id))
+			}catch(ex) {
+				console.log(ex.response)
+			}
+	}
+
 	useEffect(() => {
 		fetchHotels();
 	},[]);
@@ -41,7 +50,7 @@ export default function MyHotels(props) {
 							<td>{hotel.name}</td>
 							<td>
 								<button className='btn btn-warning'>Edytuj</button>
-								<button className='mx-1 btn btn-danger'>Usuń</button>
+								<button onClick={()=> deleteHandler(hotel.id)} className='mx-1 btn btn-danger'>Usuń</button>
 							</td>
 						</tr>
             ))}
