@@ -30,7 +30,7 @@ export default function Home(props) {
 		try {
 			///
 			const res = await axios.get('/hotels.json')
-      const newHotel = objectToArrayWithId(res.data)
+      const newHotel = objectToArrayWithId(res.data).filter(hotel => hotel.status == 1)
       setHotels(newHotel)
 			console.log(newHotel)
 		} catch (ex) {

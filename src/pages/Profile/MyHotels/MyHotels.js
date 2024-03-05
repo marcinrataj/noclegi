@@ -42,14 +42,21 @@ export default function MyHotels(props) {
 				<table className='table'>
 					<thead>
 						<th>Nazwa</th>
+						<th>Status</th>
 						<th>Opcja</th>
 					</thead>
 					<tbody>
 						{hotels.map(hotel => (
               <tr>
 							<td>{hotel.name}</td>
+							<td>{hotel.status == 1
+							? <span className='badge bg-success text-light'>aktywny</span>
+							: <span className='badge bg-secondary text-light'>ukryty</span>
+							
+							}
+							</td>
 							<td>
-								<button className='btn btn-warning'>Edytuj</button>
+								<Link to={`/profil/hotele/edytuj/${hotel.id}`} className='btn btn-warning'>Edytuj</Link>
 								<button onClick={()=> deleteHandler(hotel.id)} className='mx-1 btn btn-danger'>Usuń</button>
 							</td>
 						</tr>

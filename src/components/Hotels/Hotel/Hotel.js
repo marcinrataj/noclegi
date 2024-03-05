@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import styles from './Hotel.module.css';
-import hotelImg from '../../../assets/images/hotel.jpg';
 import ThemeContext from '../../../context/themeContext';
 import { useContext } from 'react';
 import useAuth from '../../../hooks/useAuth';
@@ -19,17 +18,27 @@ function Hotel(props) {
 
 	const clickHandler = (e) => {
 		// e.preventDefault();
-		if(props.onOpen){
-			props.onOpen(props)
-		};
+		if (props.onOpen) {
+			props.onOpen(props);
+		}
 	};
+
+	let range = { min: 200, max: 300 };
+	let delta = range.max - range.min;
+
+	const rand = Math.round(range.min + Math.random() * delta);
+
 	return (
 		<>
 			<div className={`card  ${styles.hotel}`}>
 				<div className='card-body'>
 					<div className='row'>
 						<div className='col-4'>
-							<img src={hotelImg} alt='' className='img-fluid img-thumbnail' />
+							<img
+								src={`https://source.unsplash.com/random/${rand}×${rand}`}
+								alt=''
+								className='img-fluid img-thumbnail'
+							/>
 						</div>
 						<div className='col-8'>
 							<div className='row'>
@@ -39,7 +48,8 @@ function Hotel(props) {
 								</div>
 								<div className='col text-end'>
 									<h5>Ocena : {props.rating ?? 0}</h5>
-									<Link onClick={clickHandler}
+									<Link
+										onClick={clickHandler}
 										className={`btn btn-${theme.color} mt-2 px-5 float-end`}
 										to={`/hotele/${props.id}`}
 									>
@@ -60,7 +70,9 @@ function Hotel(props) {
 							<p className={styles.description}>{props.description}</p>
 
 							{auth ? (
-								<p className='mt-2'>Dostępność: {props.rooms} pokoje są wolne</p>
+								<p className='mt-2'>
+									Dostępność: {props.rooms} pokoje są wolne
+								</p>
 							) : (
 								<p className='mt-2'>Dostępność: Zaloguj</p>
 							)}

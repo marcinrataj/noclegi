@@ -26,6 +26,7 @@ import AuthenticatedRoute from './components/hoc/AuthenticatedRoute';
 import ErrorBoundary from './components/hoc/ErrorBoundary';
 import AddHotel from './pages/Profile/MyHotels/AddHotel/AddHotel';
 import Register from './pages/Auth/Register/Register';
+import EditHotel from './pages/Profile/MyHotels/EditHotel/EditHotel';
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 
 function App() {
@@ -55,6 +56,10 @@ function App() {
 			<ErrorBoundary>
 				<Suspense fallback={<p>Ładowanie...</p>}>
 					<Switch>
+						<AuthenticatedRoute
+							path='/profil/hotele/edytuj/:id'
+							component={EditHotel}
+						/>
 						<AuthenticatedRoute
 							path='/profil/hotele/dodaj'
 							component={AddHotel}
